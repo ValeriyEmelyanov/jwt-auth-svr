@@ -1,8 +1,8 @@
 package com.example.jwtauthsvr.service.impl;
 
-import com.example.jwtauthsvr.dto.RefreshJwtRequest;
 import com.example.jwtauthsvr.dto.AuthRequest;
 import com.example.jwtauthsvr.dto.AuthResponse;
+import com.example.jwtauthsvr.dto.RefreshJwtRequest;
 import com.example.jwtauthsvr.exception.AuthException;
 import com.example.jwtauthsvr.model.AuthInfo;
 import com.example.jwtauthsvr.model.User;
@@ -13,10 +13,10 @@ import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -28,6 +28,8 @@ public class AuthServiceImpl implements AuthService {
     private final Map<String, String> refreshStorage = new ConcurrentHashMap<>();
     private final JwtProvider jwtProvider;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public AuthInfo getAuthInfo() {
         return (AuthInfo) SecurityContextHolder.getContext().getAuthentication();
@@ -37,7 +39,7 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponse login(@NonNull AuthRequest request) {
         final User user = userService.getByLogin(request.getLogin())
                 .orElseThrow(() -> new AuthException("Пользователь не найден"));
-        if (user.getPassword().equals(request.getPassword())) {
+        if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             final String accessToken = jwtProvider.generateAccessToken(user);
             final String refreshToken = jwtProvider.generateRefreshToken(user);
             refreshStorage.put(user.getLogin(), refreshToken);
