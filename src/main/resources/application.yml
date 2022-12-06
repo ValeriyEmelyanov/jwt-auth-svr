@@ -1,0 +1,7 @@
+jwt:
+  secret:
+    access: cue+IftBIPyaeLyoGfZ6ZtukljcGc4EyvmKyA+AWauwD8REzjU808w0ig36JBp7Hs3Qn+voDNkwZQpbrI5WwCw==
+    refresh: d2OFrL5/Vvp7rFHCq0jaFXUnMbwDg3RixYy6cF1vIIjXTO+xrDRRokF3ZK8NZ4kFPpSNYDxqICCWvBtYzzrRfw==
+  duration:
+    access-token: 5
+    refresh-token: 30
