@@ -1,3 +1,7 @@
+spring:
+  redis:
+    host: localhost
+    port: 6379
 jwt:
   secret:
     access: cue+IftBIPyaeLyoGfZ6ZtukljcGc4EyvmKyA+AWauwD8REzjU808w0ig36JBp7Hs3Qn+voDNkwZQpbrI5WwCw==
@@ -5,3 +9,6 @@ jwt:
   duration:
     access-token: 5
     refresh-token: 30
+redis:
+  duration:
+    value: 30
