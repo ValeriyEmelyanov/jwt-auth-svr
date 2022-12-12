@@ -6,6 +6,7 @@ import com.example.jwtauthsvr.dto.RefreshJwtRequest;
 import com.example.jwtauthsvr.exception.AuthException;
 import com.example.jwtauthsvr.model.AuthInfo;
 import com.example.jwtauthsvr.model.User;
+import com.example.jwtauthsvr.repository.KeyValueTempStorage;
 import com.example.jwtauthsvr.security.JwtProvider;
 import com.example.jwtauthsvr.service.AuthService;
 import com.example.jwtauthsvr.service.UserService;
@@ -17,15 +18,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
     private final UserService userService;
-    private final Map<String, String> refreshStorage = new ConcurrentHashMap<>();
+    private final KeyValueTempStorage refreshStorage;
     private final JwtProvider jwtProvider;
 
     private final PasswordEncoder passwordEncoder;
