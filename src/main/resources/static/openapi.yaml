@@ -179,10 +179,10 @@ paths:
       responses:
         '200':
           description: OK
-  /api/users/{id}/activity:
+  /api/users/{id}/enabled:
     patch:
       summary: Включить учетную запись пользователя или отключить
-      operationId: activateUser
+      operationId: enableUser
       tags:
         - user
       parameters:
@@ -198,7 +198,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserActivityRequest'
+              $ref: '#/components/schemas/UserEnanledRequest'
       responses:
         '200':
           description: OK
@@ -313,7 +313,7 @@ components:
           type: string
           description: Логин
           example: ivaniv_ii
-        active:
+        enabled:
           type: boolean
           description: Пользователь активен (true) или отключен (false)
           example: true
@@ -365,11 +365,11 @@ components:
           description: Всего страниц
           type: integer
           example: 1
-    UserActivityRequest:
+    UserEnabledRequest:
       type: object
       description: Запрос на включение учетной записи пользователя или отключение
       properties:
-        activate:
+        enabled:
           type: boolean
           description: true - включить учетную запись пользователя, false - отключить пользователя
           example: false

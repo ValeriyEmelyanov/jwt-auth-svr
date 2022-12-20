@@ -37,6 +37,9 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponse login(@NonNull AuthRequest request) {
         final User user = userService.getByLogin(request.getLogin())
                 .orElseThrow(() -> new AuthException("Пользователь не найден"));
+        if (!user.getEnabled()) {
+            throw new AuthException("Пользователь заблокирован");
+        }
         if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             final String accessToken = jwtProvider.generateAccessToken(user);
             final String refreshToken = jwtProvider.generateRefreshToken(user);
