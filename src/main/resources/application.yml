@@ -14,7 +14,7 @@ spring:
   sql:
     init:
       platform: postgresql
-      mode: always
+      mode: never
 jwt:
   secret:
     access: cue+IftBIPyaeLyoGfZ6ZtukljcGc4EyvmKyA+AWauwD8REzjU808w0ig36JBp7Hs3Qn+voDNkwZQpbrI5WwCw==
