@@ -21,6 +21,7 @@ Refresh токены хранятся в Redis.
 * Spring Boot
 * JWT
 * Redis
+* PostgreSQL
 
 ### Запуск Redis в контейнере
 Первый запуск
