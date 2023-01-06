@@ -198,7 +198,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserEnanledRequest'
+              $ref: '#/components/schemas/UserEnabledRequest'
       responses:
         '200':
           description: OK
@@ -278,6 +278,10 @@ components:
           type: string
           description: Логин пользователя
           example: ivaniv_ii
+        password:
+          type: string
+          description: пароль пользователя
+          example: 12345
         firstName:
           type: string
           description: Имя
